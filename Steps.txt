@@ -1,0 +1,73 @@
+ubuntu 24 -> t2.xlarge , storage : 30 gb
+SG -> 22, 8080, 9000, 3000
+
+install aws cli
+install jenkins
+install docker
+install trivy
+
+aws --version
+docker --version
+trivy --version
+
+install docker scout
+
+ip :8080
+configure jenkins
+
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+dokcer ps
+
+ip:9000
+admin , admin
+
+
+manage jenkins -> plugins
+Eclispe Temurin installer
+Sonarqube Scanner
+NodeJS
+Docker, Docker commons , Docker pipeline, Docker API, Docker-build-step
+OWASP Dependency-check
+EMail Extension template
+Blue Ocean
+Pipeline: Stage View
+(tick) restart jenkins
+
+
+ip:9000 (Sonarqube)
+admin , admin
+
+SonarQube configuration in Jenkins :
+Before configuring SonarQube in jenkins , we need to generate a SoanrQube token to establish a connection b/w jenkins and SonarQube.
+Goto SonarQube console console => Administrator(top pane) -> 'Security' drop down -> users -> 3 dots -> Generate token (name : jenkins)
+
+Configuration of SonarQube Token in Jenkins :
+Manage Jenkins -> Security -> Credentials -> global =>
+kind (secret text) , secret (sonarqube_token) , id (sonar-token)
+kind (username and password) , username (docker_username) , password (docker_token/pass) , iD (docker)
+
+Create webhook in SonarQube :
+SonarQube Dashboard -> Administration -> Configuration -> webhooks => create
+name (jenkins) , url (http:jenkins_ip:8080/sonarqube-webhook/)
+
+Tools Configuration in Jenkins :
+Manage Jenkins ->  System configuration -> tools =>
+JDK => name (jdk17) , check install automatically ->Install from adoptium.net , jdk-17.0.8.1+1
+SoanrQube Scanner Installation => name (sonar-scanner) , version (latest version : 6.2.0.4610)
+Node JS => name (node16) , version (latest : nodeJS 16.20.0) 
+Dependency check => nme (DP-check) , automatcially -> install from Github.com (select latest version : 10.0.4)
+Docker => name (docker) , automatcially -> Download from docker.com , version (latest)
+
+System Configuration in Jenkins :
+Manage Jenkins -> System -> SonarQube Server =>
+name (sonar-server) , url (https://sonar:9000) , server authentication token (sonar-token (from dropdown))
+
+
+
+
+
+
+
+
+
+
