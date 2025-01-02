@@ -62,6 +62,32 @@ System Configuration in Jenkins :
 Manage Jenkins -> System -> SonarQube Server =>
 name (sonar-server) , url (https://sonar:9000) , server authentication token (sonar-token (from dropdown))
 
+Gmail -> manage account -> app password (2 step authentication should be enabled for the account) =>
+app name (jenkins) -> Generate password -> copy
+
+manage jenkins -> Credentials -> System -> Global Credentials -> Username and password =>
+username (@gmail.com) , password (app password), ID (mail-cred)
+
+Manage Jenkins -> System -> Extended E-mail Notifications =>
+SMTP server (smtp.gmail.com) , smtp port (465) , Advanced =>
+credentials (from dropdown -> select (email-creds) , tick (use SSL, Use OAuth 2.0)
+
+Manage Jenkins -> System -> E-mail Notifications =>
+SMTP server (smtp.gmail.com) -> Advanced =>
+'tick' use SMTP Authentication => username (email) , password (app_password) , tick (USE SSL) ,
+SMTP port (465) ,reply-to address (email) , tick (test configuration by sending test e mail) =>
+test e-amil recipient (email) -> test configuration
+
+CTRL + F -> Default triggers -> tick (Always , Failure - Any , Success)
+check email -> did u got mail or not
+
+Jenkins -> New Item -> name (starbucks) -> pipeline -> paste the pipeline code -> build
+
+sonarqube -> check the vulnerabilities
+
+ip:3000 (chrome) -> starbucks website will be opened
+
+
 
 
 
